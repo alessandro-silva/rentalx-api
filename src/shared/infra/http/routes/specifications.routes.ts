@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 import { CreateSpecificationController } from '@modules/cars/useCases/createSpecification/CreateSpecificationController';
 
+import { ensureAdmin } from '../middlewares/ensureAdmin';
 import { ensureAuthenticated } from '../middlewares/ensureAuthenticated';
 // import { SpecificationsRepository } from '../modules/cars/repositories/implementations/SpecificationsRepository';
 
@@ -15,7 +16,11 @@ const createSpecificationController = new CreateSpecificationController();
 //   return response.json(specifications);
 // });
 
-specificationsRoutes.use(ensureAuthenticated);
-specificationsRoutes.post('/', createSpecificationController.handle);
+specificationsRoutes.post(
+  '/',
+  ensureAuthenticated,
+  ensureAdmin,
+  createSpecificationController.handle,
+);
 
 export default specificationsRoutes;
