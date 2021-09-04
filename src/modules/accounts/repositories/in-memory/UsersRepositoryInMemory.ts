@@ -42,6 +42,25 @@ class UsersRepositoryInMemory implements IUsersRepository {
 
     return user;
   }
+
+  async save({
+    id,
+    email,
+    name,
+    password,
+    driver_license,
+    avatar,
+  }: ICreateUserDTO): Promise<User> {
+    const user = this.users.find(user => user.id === id);
+
+    user.name = name;
+    user.email = email;
+    user.password = password;
+    user.driver_license = driver_license;
+    user.avatar = avatar;
+
+    return user;
+  }
 }
 
 export { UsersRepositoryInMemory };

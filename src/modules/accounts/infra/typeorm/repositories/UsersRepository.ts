@@ -46,6 +46,10 @@ class UsersRepository implements IUsersRepository {
 
     return user;
   }
+
+  async save(date: ICreateUserDTO): Promise<User> {
+    return this.repository.save(date);
+  }
 }
 
 export { UsersRepository };
